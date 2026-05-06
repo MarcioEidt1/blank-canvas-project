@@ -48,7 +48,7 @@ Deno.serve(async (req) => {
       req.headers.get("origin") || "https://example.com";
 
     const { data: vehicles } = await supabase
-      .from("vehicles")
+      .from("public_vehicles")
       .select("id,brand,model,version,year,year_model,km,fuel,transmission,price,color,image_url,display_name,description,highlights,is_promotion,promotion_price,promotion_label,promotion_until,doors,power_cv,featured")
       .eq("is_active", true)
       .eq("show_on_website", true)
