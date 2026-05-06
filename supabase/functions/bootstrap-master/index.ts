@@ -5,25 +5,34 @@ Deno.serve(async (req) => {
     return new Response(null, {
       headers: {
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "authorization, content-type",
+        "Access-Control-Allow-Headers": "authorization, content-type, apikey",
         "Access-Control-Allow-Methods": "POST, OPTIONS",
       },
     });
   }
 
   try {
-    const { email, password, bootstrap_token } = await req.json();
-    const expected = Deno.env.get("BOOTSTRAP_TOKEN");
-    if (!expected || bootstrap_token !== expected) {
-      return new Response(JSON.stringify({ error: "Forbidden" }), { status: 403 });
-    }
-
+    const { email, password } = await req.json();
     const admin = createClient(
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
-    // Check if user exists
+    // Only allow if there is no existing master admin yet
+    const { data: existingMasters } = await admin
+      .from("user_roles")
+      .select("user_id")
+      .eq("role", "admin")
+      .eq("is_master", true)
+      .limit(1);
+
+    if (existingMasters && existingMasters.length > 0) {
+      return new Response(JSON.stringify({ error: "Master admin already exists. Remove this function or use manage-admin-users." }), {
+        status: 403,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
     const { data: list } = await admin.auth.admin.listUsers({ perPage: 1000 });
     let user = list.users.find((u) => u.email?.toLowerCase() === email.toLowerCase());
 
@@ -33,7 +42,9 @@ Deno.serve(async (req) => {
         password,
         email_confirm: true,
       });
-      if (error) return new Response(JSON.stringify({ error: error.message }), { status: 400 });
+      if (error) {
+        return new Response(JSON.stringify({ error: error.message }), { status: 400 });
+      }
       user = created.user;
     } else {
       await admin.auth.admin.updateUserById(user.id, { password, email_confirm: true });
@@ -49,7 +60,7 @@ Deno.serve(async (req) => {
       { onConflict: "user_id" }
     );
 
-    return new Response(JSON.stringify({ success: true, user_id: user!.id }), {
+    return new Response(JSON.stringify({ success: true, user_id: user!.id, email }), {
       headers: { "Content-Type": "application/json" },
     });
   } catch (e) {
