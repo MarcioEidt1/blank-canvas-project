@@ -45,7 +45,7 @@ Deno.serve(async (req) => {
     const fullFields = `${baseFields},description,doors,power_cv,accessories,internal_color,video_url,factory_warranty_date`;
 
     const { data: vehicles } = await supabase
-      .from("vehicles")
+      .from("public_vehicles")
       .select(detailLevel === "full" ? fullFields : baseFields)
       .eq("is_active", true)
       .eq("show_on_website", true)
