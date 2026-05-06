@@ -360,11 +360,12 @@ function toCSV(rows: Record<string, any>[]): string {
 }
 
 const AdminDataExport = () => {
-  const { isMaster } = useAuth();
+  const { isMaster, hasPermission } = useAuth();
+  const canExport = isMaster || hasPermission("data_export");
   const [exporting, setExporting] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
-  if (!isMaster) {
+  if (!canExport) {
     return (
       <AdminLayout>
         <div className="max-w-2xl mx-auto bg-card border border-border rounded-lg p-8 text-center">
