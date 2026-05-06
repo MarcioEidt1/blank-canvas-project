@@ -1,1 +1,16 @@
 project_id = "dwmrrstlxbmhrgwddmdp"
+
+[functions.manage-admin-users]
+verify_jwt = true
+
+[functions.resolve-login]
+verify_jwt = false
+
+[functions.export-backup]
+verify_jwt = true
+
+[functions.feed-json]
+verify_jwt = false
+
+[functions.feed-xml]
+verify_jwt = false
