@@ -16,7 +16,7 @@ const WhatsAppButton = () => {
     queryKey: ["vehicle-whatsapp", params.id],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from("vehicles")
+        .from("public_vehicles")
         .select("brand, model, version, display_name, year, price")
         .eq("id", params.id!)
         .single();

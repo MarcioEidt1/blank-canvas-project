@@ -83,18 +83,21 @@ export type Database = {
       site_settings: {
         Row: {
           id: string
+          is_public: boolean
           key: string
           updated_at: string
           value: string
         }
         Insert: {
           id?: string
+          is_public?: boolean
           key: string
           updated_at?: string
           value?: string
         }
         Update: {
           id?: string
+          is_public?: boolean
           key?: string
           updated_at?: string
           value?: string
@@ -454,7 +457,111 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      public_vehicles: {
+        Row: {
+          accessories: string[] | null
+          brand: string | null
+          color: string | null
+          created_at: string | null
+          description: string | null
+          display_name: string | null
+          doors: number | null
+          factory_warranty_date: string | null
+          featured: boolean | null
+          fuel: string | null
+          highlights: string[] | null
+          id: string | null
+          image_position: string | null
+          image_url: string | null
+          internal_color: string | null
+          is_active: boolean | null
+          is_promotion: boolean | null
+          km: number | null
+          model: string | null
+          power_cv: string | null
+          price: number | null
+          promotion_label: string | null
+          promotion_price: number | null
+          promotion_until: string | null
+          show_on_website: boolean | null
+          status: string | null
+          transmission: string | null
+          updated_at: string | null
+          version: string | null
+          video_url: string | null
+          year: number | null
+          year_model: number | null
+        }
+        Insert: {
+          accessories?: string[] | null
+          brand?: string | null
+          color?: string | null
+          created_at?: string | null
+          description?: string | null
+          display_name?: string | null
+          doors?: number | null
+          factory_warranty_date?: string | null
+          featured?: boolean | null
+          fuel?: string | null
+          highlights?: string[] | null
+          id?: string | null
+          image_position?: string | null
+          image_url?: string | null
+          internal_color?: string | null
+          is_active?: boolean | null
+          is_promotion?: boolean | null
+          km?: number | null
+          model?: string | null
+          power_cv?: string | null
+          price?: number | null
+          promotion_label?: string | null
+          promotion_price?: number | null
+          promotion_until?: string | null
+          show_on_website?: boolean | null
+          status?: string | null
+          transmission?: string | null
+          updated_at?: string | null
+          version?: string | null
+          video_url?: string | null
+          year?: number | null
+          year_model?: number | null
+        }
+        Update: {
+          accessories?: string[] | null
+          brand?: string | null
+          color?: string | null
+          created_at?: string | null
+          description?: string | null
+          display_name?: string | null
+          doors?: number | null
+          factory_warranty_date?: string | null
+          featured?: boolean | null
+          fuel?: string | null
+          highlights?: string[] | null
+          id?: string | null
+          image_position?: string | null
+          image_url?: string | null
+          internal_color?: string | null
+          is_active?: boolean | null
+          is_promotion?: boolean | null
+          km?: number | null
+          model?: string | null
+          power_cv?: string | null
+          price?: number | null
+          promotion_label?: string | null
+          promotion_price?: number | null
+          promotion_until?: string | null
+          show_on_website?: boolean | null
+          status?: string | null
+          transmission?: string | null
+          updated_at?: string | null
+          version?: string | null
+          video_url?: string | null
+          year?: number | null
+          year_model?: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       has_permission: {
