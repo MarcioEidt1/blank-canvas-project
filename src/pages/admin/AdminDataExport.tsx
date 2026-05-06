@@ -360,17 +360,18 @@ function toCSV(rows: Record<string, any>[]): string {
 }
 
 const AdminDataExport = () => {
-  const { isMaster } = useAuth();
+  const { isMaster, hasPermission } = useAuth();
+  const canExport = isMaster || hasPermission("data_export");
   const [exporting, setExporting] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
-  if (!isMaster) {
+  if (!canExport) {
     return (
       <AdminLayout>
         <div className="max-w-2xl mx-auto bg-card border border-border rounded-lg p-8 text-center">
           <ShieldAlert className="mx-auto mb-4 text-destructive" size={48} />
           <h1 className="font-display font-bold text-2xl text-foreground mb-2">Acesso Restrito</h1>
-          <p className="text-muted-foreground">Apenas administradores Master podem exportar dados.</p>
+          <p className="text-muted-foreground">Você não tem permissão para exportar dados. Solicite a um Master o acesso "Exportar Dados".</p>
         </div>
       </AdminLayout>
     );
