@@ -210,15 +210,7 @@ export type Database = {
           name?: string
           vehicle_id?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "vehicle_documents_vehicle_id_fkey"
-            columns: ["vehicle_id"]
-            isOneToOne: false
-            referencedRelation: "vehicles"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       vehicle_expenses: {
         Row: {
@@ -242,15 +234,7 @@ export type Database = {
           id?: string
           vehicle_id?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "vehicle_expenses_vehicle_id_fkey"
-            columns: ["vehicle_id"]
-            isOneToOne: false
-            referencedRelation: "vehicles"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       vehicle_images: {
         Row: {
@@ -277,15 +261,7 @@ export type Database = {
           sort_order?: number
           vehicle_id?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "vehicle_images_vehicle_id_fkey"
-            columns: ["vehicle_id"]
-            isOneToOne: false
-            referencedRelation: "vehicles"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       vehicle_movements: {
         Row: {
@@ -318,15 +294,7 @@ export type Database = {
           type?: string
           vehicle_id?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "vehicle_movements_vehicle_id_fkey"
-            columns: ["vehicle_id"]
-            isOneToOne: false
-            referencedRelation: "vehicles"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       vehicles: {
         Row: {
@@ -501,11 +469,9 @@ export type Database = {
         Returns: boolean
       }
       is_master_admin: { Args: { _user_id: string }; Returns: boolean }
-      resolve_login_email: { Args: { _login: string }; Returns: string }
-      resolve_recovery_email: { Args: { _login: string }; Returns: string }
     }
     Enums: {
-      app_role: "admin" | "user"
+      app_role: "admin" | "moderator" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -633,7 +599,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "user"],
+      app_role: ["admin", "moderator", "user"],
     },
   },
 } as const
