@@ -19,6 +19,7 @@ const PERMISSION_OPTIONS = [
   { key: "import", label: "Importar dados" },
   { key: "feeds", label: "Feeds Catálogo" },
   { key: "backup", label: "Backup" },
+  { key: "data_export", label: "Exportar Dados" },
 ];
 
 interface AdminUser {
