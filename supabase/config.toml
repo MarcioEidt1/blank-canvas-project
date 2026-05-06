@@ -1,8 +1,5 @@
 project_id = "dwmrrstlxbmhrgwddmdp"
 
-[functions.bootstrap-master]
-verify_jwt = false
-
 [functions.manage-admin-users]
 verify_jwt = true
 
