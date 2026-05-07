@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "predev": "node scripts/guard-auth-middleware.mjs",
-    "prebuild": "node scripts/guard-auth-middleware.mjs",
+    "prebuild": "node scripts/guard-auth-middleware.mjs && vitest run src/test/public-vehicles-rls.test.ts",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
