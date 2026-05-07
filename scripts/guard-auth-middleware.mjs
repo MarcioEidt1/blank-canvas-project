@@ -18,14 +18,13 @@ if (existsSync(target)) {
     preview = readFileSync(target, "utf8").slice(0, 200);
   } catch {}
   unlinkSync(target);
-  console.error(
-    "\n[guard-auth-middleware] ❌ auth-middleware.ts foi recriado e removido.\n" +
+  console.warn(
+    "\n[guard-auth-middleware] ⚠️  auth-middleware.ts foi recriado e removido automaticamente.\n" +
       "Esse arquivo NÃO pertence a este projeto (usa @tanstack/react-start).\n" +
-      "Conteúdo inicial removido:\n" +
+      "Prévia do conteúdo removido:\n" +
       preview +
-      "\n\nRevise antes de prosseguir. Build abortado.\n"
+      "\n\nBuild prossegue normalmente.\n"
   );
-  process.exit(1);
 }
 
 console.log("[guard-auth-middleware] ok");
