@@ -8,7 +8,9 @@ import { defineConfig, devices } from "@playwright/test";
  *
  * NOT wired into prebuild — run manually with `bun run e2e`.
  */
-const baseURL = process.env.E2E_BASE_URL ?? "https://clear-desk-craft.lovable.app";
+const baseURL =
+  process.env.E2E_BASE_URL ??
+  "https://id-preview--8ea4db22-ffb2-4b9e-b208-50e490da8389.lovable.app";
 
 export default defineConfig({
   testDir: "./e2e",
